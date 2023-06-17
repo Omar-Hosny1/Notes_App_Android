@@ -30,7 +30,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeScreenBinding
     private var dialog: Dialog? = null
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -102,7 +101,6 @@ class HomeFragment : Fragment() {
                 dismissDialog()
                 updateCallback()
             }
-
 
             removeLayout.setOnClickListener {
                 removeCallback()

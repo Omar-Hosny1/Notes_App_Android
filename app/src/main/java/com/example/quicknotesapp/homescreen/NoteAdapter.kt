@@ -35,7 +35,6 @@ class NoteAdapter(val clickListener: NoteListener) :
             }
         }
     }
-
 }
 
 class NoteDiffCallback : DiffUtil.ItemCallback<Note>() {

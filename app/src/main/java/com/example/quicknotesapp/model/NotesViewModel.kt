@@ -34,23 +34,18 @@ class NotesViewModel(application: Application, val database: NoteDatabaseDao) :
         }
     }
 
-    fun getNote(id: Long): Note {
-        var foundedNote: Note? = null
-        ioScope.launch {
-            val note = database.getNote(id)
-            foundedNote = note.value
+    suspend fun getNote(id: Long): Note {
+        return withContext(ioScope.coroutineContext) {
+            val deferredNote = async { database.getNote(id) }
+            deferredNote.await() ?: Note(1, "NOT WORKING")
         }
-        return foundedNote ?: Note(1, "NOT WORKING")
-    }
-
-    private fun updateNotes(newNotes: ArrayList<Note>) {
-//        _notes.value = newNotes
     }
 
     val noItemTextVisible = Transformations.map(notes) {
         it?.isEmpty()
     }
-    val urQNTextVisible = Transformations.map(notes) {
+
+    val yourQuickNotesTextVisible = Transformations.map(notes) {
         it?.isNotEmpty()
     }
 

@@ -17,8 +17,6 @@ interface NoteDatabaseDao {
     @Update
     fun updateNote(note: Note)
 
-    //    @Query("SELECT * FROM notes_table WHERE id = :id")
-//    fun getNote(id: Long): Note
     @Query("SELECT * FROM notes_table WHERE id = :id")
-    fun getNote(id: Long): LiveData<Note>
+    fun getNote(id: Long): Note?
 }

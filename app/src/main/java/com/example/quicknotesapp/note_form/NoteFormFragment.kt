@@ -11,6 +11,7 @@ import com.example.quicknotesapp.database.Note
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.quicknotesapp.R
 import com.example.quicknotesapp.database.NoteDatabase
@@ -18,6 +19,10 @@ import com.example.quicknotesapp.databinding.FragmentNoteFormBinding
 import com.example.quicknotesapp.generateNewId
 import com.example.quicknotesapp.model.NotesViewModel
 import com.example.quicknotesapp.model.NotesViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NoteFormFragment : Fragment() {
     lateinit var binding: FragmentNoteFormBinding
@@ -74,16 +79,20 @@ class NoteFormFragment : Fragment() {
         } else {
             binding.fragmentTitle.text = getString(R.string.update_note_text)
             binding.addNoteButton.text = getString(R.string.update_note_text)
-            val editedNote = sharedViewModel.getNote(noteId)
-            binding.noteTitleEditText.setText(editedNote.title)
-            binding.addNoteButton.setOnClickListener {
-                val enteredTitle = binding.noteTitleEditText.text.trim().toString()
-                if (enteredTitle.isNotEmpty()) {
-                    sharedViewModel.updateNote(Note(noteId, enteredTitle))
-                    this.findNavController()
-                        .navigate(NoteFormFragmentDirections.actionNoteFormToHomeScreen())
-                } else {
-                    Toast.makeText(context, "Enter a text pls", Toast.LENGTH_SHORT).show()
+            viewLifecycleOwner.lifecycleScope.launch {
+                val editedNote = sharedViewModel.getNote(noteId)
+                withContext(Dispatchers.Main) {
+                    binding.noteTitleEditText.setText(editedNote.title)
+                    binding.addNoteButton.setOnClickListener {
+                        val enteredTitle = binding.noteTitleEditText.text.trim().toString()
+                        if (enteredTitle.isNotEmpty()) {
+                            sharedViewModel.updateNote(Note(noteId, enteredTitle))
+                            this@NoteFormFragment.findNavController()
+                                .navigate(NoteFormFragmentDirections.actionNoteFormToHomeScreen())
+                        } else {
+                            Toast.makeText(context, "Enter a text pls", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
         }

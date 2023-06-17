@@ -156,7 +156,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:setVesibility="@{globalViewModel.urQNTextVisible}" />
+            app:setVesibility="@{globalViewModel.yourQuickNotesTextVisible}" />
 
         <TextView
             android:id="@+id/no_items_text"
@@ -179,7 +179,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            tools:itemCount="4"
+            tools:listitem="@layout/note_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
