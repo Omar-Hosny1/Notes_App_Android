@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeScreen">
+
+    <fragment
+        tools:layout="@layout/fragment_home_screen"
+        android:id="@+id/homeScreen"
+        android:name="com.example.quicknotesapp.homescreen.HomeFragment"
+        android:label="HomeScreen" >
+        <action
+            android:id="@+id/action_homeScreen_to_noteForm"
+            app:destination="@id/noteForm" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_note_form"
+        android:id="@+id/noteForm"
+        android:name="com.example.quicknotesapp.note_form.NoteFormFragment"
+        android:label="NoteForm" >
+        <action
+            android:id="@+id/action_noteForm_to_homeScreen"
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/homeScreen"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="updatedNoteId"
+            app:argType="long" />
+    </fragment>
+</navigation>

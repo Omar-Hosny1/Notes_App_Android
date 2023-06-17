@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">QuickNotesApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_btn">Add Note</string>
+    <string name="label_text">Your Quick Notes</string>
+    <string name="date_text">Friday, 25</string>
+    <string name="your_private_assistant_text">Your Private Assistant</string>
+    <string name="add_note_text">Add Note</string>
+    <string name="update_note_text">Update Note</string>
+    <string name="note_text_label">Note Text</string>
+    <string name="no_items_text">No Items Yet</string>
+    <string name="choose_text">Choose</string>
+    <string name="edit_text">Edit</string>
+    <string name="remove_text">Remove</string>
+</resources>

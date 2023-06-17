@@ -1,0 +1,102 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id "androidx.navigation.safeargs.kotlin"
+    id 'kotlin-kapt'
+}
+
+android {
+    buildscript {
+        repositories {
+            google()
+        }
+        dependencies {
+            def nav_version = "2.5.3"
+            classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        }
+        ext {
+
+        }
+    }
+
+    namespace 'com.example.quicknotesapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.quicknotesapp"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildscript {
+        repositories {
+            google()
+        }
+        dependencies {
+            classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    // card view
+    implementation("androidx.cardview:cardview:1.0.0")
+
+
+    def version_core = "1.10.1"
+    def  version_coroutine = "1.7.1"
+    def  version_lifecycle_extensions = "2.2.0"
+    def  version_room = "2.5.1"
+
+    // Recycler View
+    implementation("androidx.recyclerview:recyclerview:")
+    // For control over item selection of both touch and mouse driven selection
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+
+    // Android KTX
+    implementation "androidx.core:core-ktx:$version_core"
+
+    // Room and Lifecycle dependencies
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
+
+}
